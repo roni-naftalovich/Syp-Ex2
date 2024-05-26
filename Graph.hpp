@@ -45,6 +45,7 @@ namespace ariel
 
         // Arithmetic operators
         vector<vector<int>> operator+(const Graph& other) const;
+        void operator+();
         void operator+=(const Graph& other);
         void operator-();
         vector<vector<int>> operator-(const Graph& other) const;

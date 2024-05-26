@@ -160,7 +160,7 @@ operatorResult.printingGraph();
 cout << "Graph g5 += Graph g6:" << endl;
 g5.operator+=(g6);
 g5.printingGraph();
-cout << "Graph g6 after increment : " << endl;
+cout << "Graph g6 ++ : " << endl;
 g6.operator++();
 g6.printingGraph();
 }

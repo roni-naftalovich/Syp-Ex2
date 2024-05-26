@@ -103,6 +103,10 @@ void Graph::isDirectedAndWeighted(vector<vector<int>> &matrix) // for graph bein
     return resultMatrix;
 }
 
+void Graph::operator+() {
+    return;
+}
+
 void Graph::operator+=(const Graph& other) {
     if (this->numVertices != other.numVertices) {
         throw invalid_argument("Graphs must be of the same size.");
@@ -149,13 +153,25 @@ void Graph::operator-=(const Graph& other) {
 
 // Comparison operators
 bool Graph::operator==(const Graph& other) const {
-    return this->numVertices == other.numVertices &&
-           this->adjMatrix == other.adjMatrix;
+    if(this->numVertices != other.numVertices) {
+        return false;
+        }
+    for (size_t i = 0; i < this->numVertices; i++)
+    {
+        for (size_t j = 0; j < this->numVertices; j++)
+        {
+            if(this->adjMatrix[i][j] != other.adjMatrix[i][j]){
+                return false;
+            }
+        }
+        
+    }
+    return true;
 }
 
 bool Graph::operator!=(const Graph& other) const {
-    return !(this->numVertices == other.numVertices &&
-           this->getAdjMatrix() == other.getAdjMatrix());
+    bool flag = this->operator==(other);
+    return !flag;
 }
 
 
