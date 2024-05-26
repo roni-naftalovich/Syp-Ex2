@@ -94,10 +94,10 @@ void Graph::isDirectedAndWeighted(vector<vector<int>> &matrix) // for graph bein
     if (this->numVertices != other.numVertices) {
         throw invalid_argument("Graphs must be of the same size.");
     }
-    vector<vector<int>> resultMatrix = this->adjMatrix;
+    vector<vector<int>> resultMatrix(this->numVertices, vector<int>(this->numVertices, 0));
     for (size_t i = 0; i < resultMatrix.size(); i++) {
         for (size_t j = 0; j < resultMatrix[i].size(); j++) {
-            resultMatrix[i][j] += other.adjMatrix[i][j];
+            resultMatrix[i][j] = this->adjMatrix[i][j]+ other.adjMatrix[i][j];
         }
     }
     return resultMatrix;
@@ -131,7 +131,7 @@ vector<vector<int>> Graph::operator-(const Graph& other) const {
     if (this->numVertices != other.numVertices) {
         throw invalid_argument("Graphs must be of the same size.");
     }
-    vector<vector<int>> resultMatrix = this->adjMatrix;
+    vector<vector<int>> resultMatrix(this->numVertices, vector<int>(this->numVertices, 0));
     for (size_t i = 0; i < resultMatrix.size(); i++) {
         for (size_t j = 0; j < resultMatrix[i].size(); j++) {
             resultMatrix[i][j] -= other.adjMatrix[i][j];
