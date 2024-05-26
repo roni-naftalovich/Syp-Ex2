@@ -28,76 +28,6 @@ int main()
         {0, 1, 0}};
     g.loadGraph(graph); // Load the graph to the object.
 
-    g.printGraph();                                    // Should print: "Graph with 3 vertices and 2 edges."
-    cout << Algorithms::isConnected(g) << endl;        // Should print: "1" (true).
-    cout << Algorithms::shortestPath(g, 0, 2) << endl; // Should print: 0->1->2.
-    cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "0" (false).
-    Algorithms::isBipartite(g);        // Should print: "The graph is bipartite: A={0, 2}, B={1}."
-
-    // 5x5 matrix that represents a non-connected graph with a cycle.
-    vector<vector<int>> graph2 = {
-        {0, 1, 1, 0, 0},
-        {1, 0, 1, 0, 0},
-        {1, 1, 0, 1, 0},
-        {0, 0, 1, 0, 0},
-        {0, 0, 0, 0, 0}};
-
-    g.loadGraph(graph2); // Load the graph to the object.
-
-    g.printGraph();                                    // Should print: "Graph with 5 vertices and 4 edges."
-    cout << Algorithms::isConnected(g) << endl;        // Should print: "0" (false).
-    cout << Algorithms::shortestPath(g, 0, 4) << endl; // Should print: "-1" (there is no path between 0 and 4).
-    cout << Algorithms::isContainsCycle(g) << endl;    // Should print: "The cycle is: 0->1->2->0".
-    Algorithms::isBipartite(g);        // Should print: "0" (false).
-
-    ariel::Graph g2(false);
-    // 5x5 matrix that reprsents a connected weighted graph.
-    vector<vector<int>> graph3 = {
-        {0, 1, 0, 0, 0},
-        {1, 0, 3, 0, 0},
-        {0, 3, 0, 4, 0},
-        {0, 0, 4, 0, 5},
-        {0, 0, 0, 5, 0}};
-    g2.loadGraph(graph3); // Load the graph to the object.
-
-    g2.printGraph();                                    // Should print: "Graph with 5 vertices and 4 edges."
-    cout << Algorithms::isConnected(g2) << endl;        // Should print: "1" (true).
-    cout << Algorithms::shortestPath(g2, 0, 4) << endl; // Should print: 0->1->2->3->4.
-    cout << Algorithms::isContainsCycle(g2) << endl;    // Should print: "0" (false). should print 1
-    Algorithms::isBipartite(g2);        // Should print: "The graph is biparpite: A={0, 2, 4}, B={1, 3}."
-
-    // 5x4 matrix that reprsents invalid graph.
-    vector<vector<int>> graph4 = {
-        {0, 1, 2, 0},
-        {1, 0, 3, 0},
-        {2, 3, 0, 4},
-        {0, 0, 4, 0},
-        {0, 0, 0, 5}};
-    try
-    {
-        g2.loadGraph(graph4); // Load the graph to the object.
-    }
-    catch (const std::invalid_argument &e)
-    {
-        // beacuse we it to be undirected but the matrix is not symmetric (more it is not square, it will fall in the beggining)
-        cout << e.what() << endl; // Should print: "The graph is not directed."
-    }
-
-    ariel::Graph g3(true);
-    vector<vector<int>> graph5= {
-        {0, 1, 2, 0},
-        {1, 0, 3, 0},
-        {2, 3, 0, 4},
-        {0, 0, 4, 0},
-        {0, 0, 0, 5}};
-    try
-    {
-        g3.loadGraph(graph5); // Load the graph to the object.
-    }
-    catch (const std::invalid_argument &e)
-    {
-        cout << e.what() << endl; // Should print: "Invalid graph: The graph is not a square matrix."
-    }
 
     ariel::Graph g4(true);
     std::vector<std::vector<int>> graph6 = {
@@ -110,13 +40,8 @@ int main()
 g4.loadGraph(graph6);
 g4.printGraph();
 
-    cout << Algorithms::isConnected(g4) << endl;        // Should print: "1" (true).
-    cout << Algorithms::shortestPath(g4, 0, 4) << endl; // Should print: 0->1->2->3->4.
-    cout << Algorithms::isContainsCycle(g4) << endl; 
-    Algorithms::negativeCycle(g4);
-
-ariel::Graph g5(true);
-ariel::Graph g6(true);
+ariel::Graph g1(true);
+ariel::Graph g2(true);
 std::vector<std::vector<int>> graph7 = {
     {0, 2, 3, 0, 0},
     {0, 0, 0, 3, 0},
@@ -131,36 +56,53 @@ std::vector<std::vector<int>> graph9 = {
     {2, 0, 0, 0, 0},
     {0, 0, 0, 0, 0}
 };
-g6.loadGraph(graph9);
-g5.loadGraph(graph7);
-cout << "" << endl;
+g2.loadGraph(graph9);
+g1.loadGraph(graph7);
 
 
 cout << "Testing assignment 2 operators: " << endl;
-cout << "" << endl;
-cout<< "Original Graph g5:" << endl;
-g5.printGraph();
-g5.printingGraph();
-cout<< "Original Graph g6:" << endl;
-g6.printGraph();
-g6.printingGraph();
-cout << "Graph g6 > Graph g5: " << (g6.operator>(g5)) << endl;
-cout << "Graph g5 > Graph g6: " << (g5.operator>(g6)) << endl;
-cout << "Graph g6 == Graph g5: " << (g6.operator==(g5)) << endl;
-ariel::Graph operatorResult(g6.getisDirected());
-vector<vector<int>> graph8 = g6.operator*(g5);
+cout<< "" <<endl;
+cout<< "Original Graph g:" << endl;
+cout << g << endl;
+cout<< "Original Graph g1:" << endl;
+cout << g1 << endl;
+cout<< "Original Graph g2:" << endl;
+cout << g2 << endl;
+cout << "Graph g2 > Graph g1: " << (g2>g1) << endl;
+cout << "Graph g1 > Graph g2: " << (g1>g2) << endl;
+cout << "Graph g2 == Graph g1: " << (g2==(g1)) << endl;
+cout << "Graph g >= Graph g1: " << (g>=g1) << endl;
+cout << "Graph g <= Graph g1: " << (g<=g1) << endl;
+cout << "Graph g != Graph g1: " << (g!=g1) << endl;
+ariel::Graph operatorResult(g2.getisDirected());
+vector<vector<int>> graph8 = g2 *g1;
 operatorResult.loadGraph(graph8);
-cout<< "The graph created by multiplying Graph g6 and Graph g5 is:" << endl;
-operatorResult.printGraph();
-operatorResult.printingGraph();
-cout<< "The graph created by adding Graph g6 and Graph g5 is:" << endl;
-graph8 = g6.operator+(g5);
+cout<< "The graph created by multiplying Graph g2 and Graph g1 is:" << endl;
+cout<< operatorResult << endl;
+cout <<"Trying to multiply g (3X3) and g1 (5X5): " << endl;
+try{
+graph8= g * g1;
+}
+catch(invalid_argument &e){
+    cout << e.what() << endl;
+}
+cout<< "The graph created by adding Graph g2 and Graph g1 is:" << endl;
+graph8 = g2+(g1);
 operatorResult.loadGraph(graph8);
-operatorResult.printingGraph();
-cout << "Graph g5 += Graph g6:" << endl;
-g5.operator+=(g6);
-g5.printingGraph();
-cout << "Graph g6 ++ : " << endl;
-g6.operator++();
-g6.printingGraph();
+cout<< operatorResult << endl;
+cout << "Graph g1 += Graph g2:" << endl;
+g1+=(g2);
+cout << g1 << endl;
+cout << "Graph g2 ++ : " << endl;
+++g2;
+cout<< g2 <<endl;
+--g2;
+cout << "Graph g2 -- : " << endl;
+--g2;
+cout<<g2<<endl;
+++g2;
+cout<< "Graph g2*=2:" <<endl;
+g2*= 2;
+cout<<g2<< endl;
+
 }

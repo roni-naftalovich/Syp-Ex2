@@ -227,7 +227,7 @@ void Graph::operator-- (){
     } 
 }
 
-void Graph::mulWeights(int a){
+void Graph::operator*=(int a){
     for (size_t i = 0; i < this->numVertices; i++)
     {
         for (size_t j = 0; j < this->numVertices; j++)
@@ -293,24 +293,41 @@ size_t Graph::numEdges() const {
 }
 
 // Print graph as a table with vertices and weights
-void Graph::printingGraph() const {
-    std::cout << "  |";
-    for (size_t i = 0; i < this->numVertices; ++i) {
-        std::cout <<i << "| ";
-    }
-    std::cout << std::endl;
+// void Graph::printingGraph() const {
+//     std::cout << "  |";
+//     for (size_t i = 0; i < this->numVertices; ++i) {
+//         std::cout <<i << "| ";
+//     }
+//     std::cout << std::endl;
 
-    for (size_t i = 0; i < this->numVertices; ++i) {
-        std::cout << i << "| ";
-        for (size_t j = 0; j < this->numVertices; ++j) {
-            if (this->adjMatrix[i][j]<0)
-            {
-                std::cout << this->adjMatrix[i][j] << " ";
-            }else{
+//     for (size_t i = 0; i < this->numVertices; ++i) {
+//         std::cout << i << "| ";
+//         for (size_t j = 0; j < this->numVertices; ++j) {
+//             if (this->adjMatrix[i][j]<0)
+//             {
+//                 std::cout << this->adjMatrix[i][j] << " ";
+//             }else{
             
-            std::cout << this->adjMatrix[i][j] << "  ";
+//             std::cout << this->adjMatrix[i][j] << "  ";
+//         }}
+//         std::cout << std::endl;
+//     }
+// }
+// Friend function for printing
+std::ostream &ariel::operator<<(ostream& os, const Graph& graph) {
+    os << "Number of vertices: " << graph.numVertices << std::endl;
+    os << "Graph is " << (graph.isDirected ? "directed" : "undirected") << std::endl;
+    os << "Graph is " << (graph.isWeighted ? "weighted" : "unweighted") << std::endl;
+    for (const auto& row : graph.adjMatrix) {
+        for (int val : row) {
+            if (val>9 || val <0){
+                os << val << " ";
+            }else{
+            os << val << "  ";
         }}
-        std::cout << std::endl;
+        os << endl;
     }
+    return os;
 }
+
 

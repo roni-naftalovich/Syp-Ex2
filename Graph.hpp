@@ -65,21 +65,24 @@ namespace ariel
         void operator-- ();
 
         //Mul weights in integer
-        void mulWeights(int a);
+        void operator*=(int a);
 
         // Multiplication operator
         vector<vector<int>> operator*(const Graph& other);
 
         bool isContainedIn(const Graph& other) const; // Helper function
+        
+        //void printingGraph() const;
 
         size_t numEdges() const; // Helper function
+    
 
-        void printingGraph() const;
+        // Friend function for printing
+        friend std::ostream &operator<<(ostream& os, const Graph& graph);
+        };
 
         
 
-
     };
-} 
 
 #endif // GRAPH_HPP
